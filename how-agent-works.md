@@ -103,4 +103,5 @@ So in the “default `str` output_type” case:
 - **Any normal string output means “I’m done”**.  
 - The only way the loop continues is if the agent explicitly returns a handoff or tool call instead of a string.  
 
-*(This section is the file content above.)*
+<img width="720" height="519" alt="image" src="https://github.com/user-attachments/assets/a6812748-4543-4d87-9ed5-e4785853ec64" />
+
