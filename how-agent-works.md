@@ -105,3 +105,23 @@ So in the “default `str` output_type” case:
 
 <img width="720" height="519" alt="image" src="https://github.com/user-attachments/assets/a6812748-4543-4d87-9ed5-e4785853ec64" />
 
+# Building Reliable Agent
+
+**I think the best thing that Agents can do now reliably is to return structured output then you can use it to run a deterministic workflow.
+Long-running agent is a different beast. It does that continously in a loop until the goal is met. Which means if your context is "Garbage", prepare to have an exponential growth of "Garbage Out".
+
+-----
+The most reliable agents are built with the same fundamentals: clear logic, good structure, and tight feedback loops.
+https://vercel.com/blog/the-no-nonsense-approach-to-ai-agent-development#step-2:-automate-the-loop
+
+Before committing to any implementation, test the task manually using real inputs and prompts. If the model can almost get there with help, it’s probably worth building. From there, structure the logic using ordinary code and only rely on the model when necessary. Once the agent is working, focus on making it resilient. Both on individual inputs and across real-world complexity.
+
+To recap, agents are useful when:
+
+The task is difficult to automate with traditional code
+
+Prompting the model manually shows signs of success
+
+You scope the agent narrowly and build on solid software practices
+
+You optimize both with hands-on intuition and structured evaluation
