@@ -1,0 +1,319 @@
+# LLM Assistant Prompt Engineering Guide
+
+**INSTRUCTION FOR LLM ASSISTANT**: This guide provides a structured approach to help users create effective prompts. Follow this guide systematically when helping users write, improve, or optimize prompts for any LLM system.
+
+## Phase 1: Assessment and Preparation
+
+### Step 1.1: Requirements Gathering
+**ASK THE USER:**
+- What is the specific task or goal for this prompt?
+- Who is the intended audience for the output?
+- What does success look like? (Define clear success criteria)
+- Do you have any existing prompt drafts or examples?
+- What context or background information is relevant?
+
+### Step 1.2: Success Criteria Definition
+**HELP USER ESTABLISH:**
+- Measurable outcomes (accuracy, format, tone, length)
+- Quality indicators (completeness, relevance, clarity)
+- Constraints and limitations
+- Testing methodology for validation
+
+### Step 1.3: Prompt Engineering vs. Alternative Assessment
+**EVALUATE IF PROMPT ENGINEERING IS THE RIGHT APPROACH:**
+- Is this a controllable behavior through prompting?
+- Would fine-tuning or other methods be more appropriate?
+- Can the task be solved with prompt optimization alone?
+
+**If prompt engineering is appropriate, proceed to Phase 2.**
+
+## Phase 2: Core Technique Application (Apply in This Order)
+
+### Technique 1: Be Clear and Direct
+**FOUNDATION RULE**: Treat the LLM like a brilliant new employee who needs explicit instructions.
+
+**IMPLEMENT:**
+1. **Context Provision:**
+   - What will the results be used for?
+   - Who is the target audience?
+   - What's the broader workflow context?
+   - What does success look like?
+
+2. **Specific Instructions:**
+   - State exactly what you want the LLM to do
+   - Define format, style, and structure requirements
+   - Specify any constraints or limitations
+
+3. **Sequential Steps:**
+   - Break complex tasks into numbered steps
+   - Use bullet points for clarity
+   - Ensure logical flow between steps
+
+**GOLDEN RULE TEST**: Could a colleague with minimal context follow these instructions? If not, clarify further.
+
+### Technique 2: Use Examples (Multishot Prompting)
+**WHEN TO APPLY**: When the desired pattern, format, or behavior isn't obvious from instructions alone.
+
+**STRUCTURE EXAMPLES:**
+```xml
+<examples>
+<example>
+Input: [Example input]
+Output: [Desired output]
+</example>
+
+<example>
+Input: [Different example input]
+Output: [Corresponding desired output]
+</example>
+</examples>
+```
+
+**EXAMPLE REQUIREMENTS:**
+- Provide 2-3 high-quality examples minimum
+- Include diverse scenarios and edge cases
+- Use consistent formatting across all examples
+- Ensure examples directly relate to the use case
+
+### Technique 3: Chain of Thought (Let LLM Think)
+**WHEN TO APPLY**: Complex problems requiring reasoning, analysis, or multi-step thinking.
+
+**IMPLEMENTATION OPTIONS:**
+
+**Option A - Explicit Thinking Instructions:**
+```
+Before providing your final answer, think through this step by step:
+1. [Analyze the problem]
+2. [Consider approaches]
+3. [Evaluate options]
+4. [Reach conclusion]
+```
+
+**Option B - XML Structured Thinking:**
+```xml
+<instructions>
+Think through your response in <thinking></thinking> tags first, then provide your answer in <answer></answer> tags.
+</instructions>
+```
+
+### Technique 4: Use XML Tags for Structure
+**PURPOSE**: Help the LLM parse and understand different prompt sections clearly.
+
+**ESSENTIAL XML PATTERNS:**
+```xml
+<instructions>
+Main task instructions
+</instructions>
+
+<context>
+Background information
+</context>
+
+<examples>
+Input-output examples
+</examples>
+
+<constraints>
+Limitations and requirements
+</constraints>
+
+<output_format>
+Desired response structure
+</output_format>
+```
+
+### Technique 5: Role Assignment (System Prompts)
+**WHEN TO APPLY**: When specific expertise, perspective, or communication style is needed.
+
+**ROLE COMPONENTS TO DEFINE:**
+1. **Expertise**: "You are a [specific expert] with [relevant experience]"
+2. **Communication Style**: How should the LLM communicate?
+3. **Behavioral Guidelines**: What principles should guide responses?
+4. **Context/Perspective**: What situation or viewpoint applies?
+
+**EFFECTIVE ROLE STRUCTURE:**
+```
+You are [specific role] with [expertise/experience].
+
+Your communication style:
+- [Style characteristic 1]
+- [Style characteristic 2]
+- [Style characteristic 3]
+
+When responding, always:
+1. [Behavioral guideline 1]
+2. [Behavioral guideline 2]
+3. [Behavioral guideline 3]
+
+Context: [Relevant situation/perspective]
+```
+
+### Technique 6: Response Prefilling
+**WHEN TO APPLY**: Need to enforce specific output format, tone, or structure.
+
+**COMMON PREFILL PATTERNS:**
+
+**For JSON Output:**
+```
+Assistant: {
+  "analysis": [
+```
+
+**For Professional Communication:**
+```
+Assistant: Dear [Name],
+
+Thank you for your inquiry. After careful consideration,
+```
+
+**For Structured Analysis:**
+```
+Assistant: ## Executive Summary
+
+Based on my analysis, the key findings are:
+
+1.
+```
+
+## Phase 3: Advanced Techniques (Apply When Needed)
+
+### Technique 7: Chain Complex Prompts
+**WHEN TO APPLY**: Tasks too complex for a single prompt or requiring specialized processing at each step.
+
+**IMPLEMENTATION STRATEGY:**
+1. **Task Decomposition**: Break into logical sequential steps
+2. **Specialized Prompts**: Optimize each prompt for its specific subtask
+3. **Clear Handoffs**: Ensure output from one step feeds clearly into the next
+
+**COMMON CHAIN PATTERNS:**
+- **Research → Analysis → Synthesis**: Gather → Process → Conclude
+- **Generate → Review → Refine**: Create → Evaluate → Improve
+- **Extract → Transform → Load**: Get data → Process → Format
+
+### Technique 8: Long Context Optimization
+**WHEN TO APPLY**: Working with extensive documents or large amounts of context.
+
+**OPTIMIZATION STRATEGIES:**
+1. **Structure Content Clearly:**
+```xml
+<document_structure>
+<section title="Section 1">
+[Content]
+</section>
+<section title="Section 2">
+[Content]
+</section>
+</document_structure>
+```
+
+2. **Strategic Information Placement:**
+   - Most important info at beginning or end
+   - Highlight key points for focus
+   - Use emphasis for crucial details
+
+3. **Provide Navigation Aids:**
+```xml
+<document_summary>
+This document contains:
+- Section 1: [Description] (lines X-Y)
+- Section 2: [Description] (lines Y-Z)
+</document_summary>
+```
+
+4. **Scope Instructions:**
+```
+Focus primarily on Section 3 for analysis, reference other sections only as needed for context.
+```
+
+## Phase 4: Integration and Optimization
+
+### Step 4.1: Technique Combination Strategy
+**BASIC INTEGRATION TEMPLATE:**
+```xml
+<role>
+[Expert persona with relevant experience]
+</role>
+
+<instructions>
+[Clear, sequential task breakdown]
+</instructions>
+
+<examples>
+[2-3 relevant input-output examples]
+</examples>
+
+<context>
+[Relevant background information]
+</context>
+
+<thinking_process>
+[Chain of thought instructions if needed]
+</thinking_process>
+
+<output_format>
+[Desired structure/format]
+</output_format>
+```
+
+### Step 4.2: Quality Assurance Checklist
+**BEFORE FINALIZING, VERIFY:**
+- [ ] Instructions pass the "golden rule test" (colleague clarity)
+- [ ] Examples are diverse, relevant, and high-quality
+- [ ] Role assignment matches task requirements
+- [ ] XML structure is logical and complete
+- [ ] Chain of thought is included for complex reasoning
+- [ ] Output format is clearly specified
+- [ ] Success criteria are measurable
+
+### Step 4.3: Testing and Iteration
+**SYSTEMATIC TESTING APPROACH:**
+1. Test the prompt against defined success criteria
+2. Identify specific failure modes or weaknesses  
+3. Apply targeted technique improvements
+4. Re-test and validate improvements
+5. Document effective patterns for reuse
+
+## Phase 5: Prompt Delivery and Guidance
+
+### Step 5.1: Present the Optimized Prompt
+**DELIVER TO USER:**
+- Complete, ready-to-use prompt
+- Clear explanation of techniques applied
+- Expected outcome description
+- Testing recommendations
+
+### Step 5.2: Usage Instructions
+**PROVIDE GUIDANCE ON:**
+- How to implement the prompt in their system
+- What variations might be needed for different contexts
+- How to measure success and iterate
+- Common troubleshooting approaches
+
+### Step 5.3: Optimization Recommendations
+**SUGGEST FOLLOW-UP IMPROVEMENTS:**
+- A/B testing different versions
+- Performance monitoring approaches  
+- When to consider prompt chaining
+- Scaling considerations for production use
+
+## Quick Reference: Technique Selection Guide
+
+**Start Here Always:**
+1. Be Clear and Direct → Foundation for all prompts
+
+**Add Based on Need:**
+2. Examples → When pattern isn't obvious from instructions
+3. Chain of Thought → For complex reasoning/analysis
+4. XML Structure → For organization and clarity
+5. Role Assignment → When expertise/perspective matters
+6. Response Prefilling → When format control is critical
+
+**Advanced Applications:**
+7. Prompt Chaining → For complex multi-step workflows
+8. Long Context → For extensive document processing
+
+**Remember**: Apply techniques incrementally. Start with clear instructions and examples, then add complexity only as needed for the specific use case.
+
+---
+
+**FINAL INSTRUCTION FOR LLM ASSISTANT**: When a user asks for help with prompts, systematically work through this guide. Start with Phase 1 requirements gathering, apply techniques in the prescribed order, and deliver a complete, tested prompt solution with clear implementation guidance.
